@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../js/react.js"></script>
+    <script src="../../../js/react.dom.js"></script>
+    <script src="../../../js/babel.min.js"></script>
+    <title>Document</title>
+
+</head>
+<body>
+    <div id="container"></div>
+    <div id="container2"></div>
+
+
+    <script type="text/babel">
+        /**
+         * 1.使用JSX创建虚拟DOM
+         * 2.react会自动遍历数组，并且显示数组中的所有元素
+         * 3.数组.map()的使用
+         * 4. Warning: Each child in an array or iterator should have a unique "key" prop.
+         *      解决：<li key={index}>{item}</li>
+         */
+
+        let names = ['Tom','Jerry','Mary'];
+        ReactDOM.render(
+            <ul>
+                {
+                    names.map((item,index) => {
+                        return <li key={index}>{item}</li>
+                    })
+                }
+            </ul>,
+            document.getElementById('container')
+        );
+    </script>
+
+
+</body>
+</html>

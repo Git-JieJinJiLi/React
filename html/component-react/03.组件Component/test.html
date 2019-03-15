@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../js/react.js"></script>
+    <script src="../../../js/react.dom.js"></script>
+    <script src="../../../js/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<div id="container"></div>
+<div id="container2"></div>
+<script type="text/babel">
+    /**
+     * 1.自定义组件
+     *      -工厂（无状态）函数（最简洁，推荐使用）
+     *          function MyComponent(){
+     *              return  <h1>工厂函数创建自定义组件</h1>
+     *          }
+     *      -类定义组件（ES6语法，复杂组件，最推荐使用）
+     *          class MyComponent extends React.Component{
+     *              render(){
+     *                  return <h1>类定义自定义组件</h1>
+     *              }
+     *          }
+     *      -ES5创建自定义组件（不推荐使用）
+     *          var MyComponent = React.createElement()
+     *2.注意事项：
+     *      （1）自定义的组件名必须首字母大写
+     *      （2）虚拟DOM元素必须只有一个根元素
+     *      （3）虚拟DOM元素必须有结束标签
+     *3.ReactDOM.render()渲染组件标签的基本流程
+     *      (1)React内部会创建组件实例对象
+     *      (2)得到包含虚拟DOM并且解析为 真实DOM
+     *      (3)插入到指定的页面元素内部
+     * 4.react组件实例对象的三个属性：
+     *      props
+     *      refs
+     *      state
+     */
+
+    //1.创建组件
+    function MyComponent(){
+        return <h1>工厂函数创建的自定义组件</h1>
+    }
+    class MyComponent2 extends React.Component{
+        render(){
+            console.log(this instanceof MyComponent2);
+            return <h1>类定义创建的自定义组件</h1>
+        }
+    }
+
+    //2.渲染组件
+    ReactDOM.render(<MyComponent />,document.getElementById('container'));
+    ReactDOM.render(<MyComponent2 />,document.getElementById('container2'));
+
+</script>
+<script type="text/babel">
+    function Person(name, age){
+
+    }
+    let person = new Person('Tom',39);
+    console.log(person);
+
+
+    class Person1{
+        constructor(name,age){
+            this.name = name;
+            this.age = age;
+        }
+    }
+
+    class Son extends Person1{
+        constructor(name,age,xxx){
+            super();    //调用父类的方法
+            this.name = name;
+            this.age = age;
+            this.xxx = xxx;
+        }
+        showName(){
+            console.log(this.name);
+        }
+    }
+    let son = new Son('Tom',23,"000000");
+    console.log(son);
+    son.showName();
+</script>
+
+</body>
+</html>

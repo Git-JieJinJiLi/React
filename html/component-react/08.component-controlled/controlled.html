@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../js/react.js"></script>
+    <script src="../../../js/react.dom.js"></script>
+    <script src="https://cdn.bootcss.com/prop-types/15.7.2/prop-types.js"></script>
+    <script src="../../../js/babel.min.js"></script>
+    <title>controlled</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <!--     
+    
+      react是个单向数据流
+      受控组件：
+      可以利用state实现数据双向绑定的效果：利用setState({xxx:xxx})来改变初始值的状态
+      
+     -->
+    <script type="text/babel">
+    class TowWay extends React.Component{
+        constructor(props){
+            super(props);
+            this.state ={
+                msg:'atguigu.com'
+            };
+            //强制改变thi指向
+            this.handleChange = this.handleChange.bind(this);
+        }
+        handleChange(event){
+            this.setState({
+                msg:event.target.value
+            });
+        }
+        render(){
+            let {msg} = this.state;
+            return (
+                <div>
+                    <input onChange={this.handleChange} type="text" value={msg} />
+                    <p>{msg}</p>
+                </div>
+            );
+        }
+    }
+    
+    ReactDOM.render(<TowWay />,document.getElementById('root'));
+
+    </script>
+</body>
+
+</html>

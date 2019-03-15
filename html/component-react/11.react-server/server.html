@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../js/react.js"></script>
+    <script src="../../../js/react.dom.js"></script>
+    <script src="https://cdn.bootcss.com/prop-types/15.7.2/prop-types.js"></script>
+    <script src="../../../js/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/babel">
+    /**React服务器端渲染入门：
+     *当服务器端接收到请求时，再服务器端基于React动态渲染页面，并且返回给浏览器显示
+     * 相对于浏览器端渲染的好处是：
+     *      服务器端和客户端可以共享某些代码，避免重复定义
+     *      首次加载页面的速度加快
+     *      便于SEO优化，服务器端渲染可以让搜索引擎更容易读取页面的meta信息以及其他SEO相关信息
+     * 相对于浏览器端渲染的不好：
+     *      对服务器的压力增大
+     *      要求服务器使用基于node搭建
+     *
+     */
+    class AjaxComponent extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                gistUrl: null
+            }
+        }
+
+        render() {
+            return (
+                <div>
+
+                </div>
+            );
+
+        }
+    }
+
+    ReactDOM.render(<AjaxComponent/>, document.getElementById('box'));
+</script>
+</body>
+</html>

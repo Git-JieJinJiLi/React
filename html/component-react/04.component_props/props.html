@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../js/react.js"></script>
+    <script src="../../../js/react.dom.js"></script>
+    <script src="https://cdn.bootcss.com/prop-types/15.7.2/prop-types.js"></script>
+    <script src="../../../js/babel.min.js"></script>
+    <title>Props</title>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    /**
+     * 1.每个组件对象都会有一个props（properties的简写）属性
+     * 2.组件标签的所有属性都保存在props中
+     * 3.内部读取某个属性值：this.props.属性名
+     * 4.props作用：通过标签属性从组件外向组件内传递数据（只读）
+     * 5.对props中的属性值惊醒类型限制和必要性限制
+     *      Person.propTypes = {
+     *          name:React.PropTypes.string.isRequired,
+     *          age:React.PropTypes.number.isRequired
+     *      }
+     * 6.扩展属性：将对象的所有户型通过props传递
+     *      <Person {...person}>
+     * 7.默认属性值：
+     *      Person.defaultProps = {
+     *          name:'Mary'
+     *      };
+     * 8.组件类的构造函数
+     */
+
+    let person = {
+        name: 'Kobe',
+        gender: "男",
+        age: '43'
+    };
+
+    class Person extends React.Component {
+        render() {
+            console.log(this.props);
+            return (
+                <ul>
+                    <li>姓名：{this.props.name}</li>
+                    <li>性别：{this.props.gender}</li>
+                    <li>年龄：{this.props.age}</li>
+                </ul>
+            );
+        }
+    }
+
+    //设置组件的默认Props值
+    Person.defaultProps = {
+        gender: '男'
+    };
+
+    //对props中的属性值进行类型限制和必要性限制
+    Person.propTypes = {
+        name: React.PropTypes.string.isRequired,
+        gender: React.PropTypes.string.isRequired,
+        age: React.PropTypes.string.isRequired
+    };
+    //渲染组件
+    ReactDOM.render(<Person {...person}/>, document.getElementById('example'));
+
+    //ReactDOM.render(<Person name={person.name}  gender={person.gender} age={person.age}/>,document.getElementById('example'));
+    //ReactDOM.render(<Person name={person.name}  age={person.age}/>,document.getElementById('example'));
+    // ReactDOM.render(<Person name={person.name}  age={person.age}/>,document.getElementById('example'));
+
+
+</script>
+</body>
+</html>

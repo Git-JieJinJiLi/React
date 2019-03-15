@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/github-react-source/170816_react_study" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/html/work/comment" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/html/work/hello-ajax" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/html/work/my-app" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/html/work/react-ui" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/html/work/router-test" vcs="Git" />
+  </component>
+</project>

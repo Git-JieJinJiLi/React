@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../js/react.js"></script>
+    <script src="../../../js/react.dom.js"></script>
+    <script src="https://cdn.bootcss.com/prop-types/15.7.2/prop-types.js"></script>
+    <script src="../../../js/babel.min.js"></script>
+    <title>refs-event</title>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    /**
+     * 组件的第二个属性refs
+     *          -组件内的标签都可以定义refs属性来标识自己
+     *          -在组件中可以通过this.refName来得到对应的真实DOM对象
+     *          -作用：用于操作指定的ref属性的dom元素对象（表单标签居多）
+     *
+     */
+
+    class App extends React.Component{
+        constructor(props){   //constructor方法只会执行一次
+            super(props);
+            this.name = name;
+            console.log(this);   //这里的this指向的是组件的实例对象
+            //找到函数
+            //用什么去强制绑定this：call ? apply（前两个方法绑定this指向之后会立即执行） ? bind(返回的是一个函数)
+            //this--->实例对象
+            this.handleClick = this.handleClick.bind(this);
+        }
+
+        //类定义中的普通方法中的this指向null
+        handleClick(){
+            //获取前边input输入的内容
+            console.log(this);    //自定义的方法中，this指向的都是null
+            let value = this.refs.msg.value;
+            alert(value);
+        }
+
+        handleBlur(event){
+            console.log(event);
+            alert(event.target.value);
+        }
+        render(){
+            return (
+                <div>
+                    <input  ref="msg" type="text" />
+                    <button onClick={this.handleClick}>提示输入语句</button>
+                    <input type="text" onBlur={this.handleBlur} placeholder="失去焦点提示数据" />
+                </div>
+            );
+        }
+    }
+    ReactDOM.render(<App />,document.getElementById('example'));
+</script>
+</body>
+</html>

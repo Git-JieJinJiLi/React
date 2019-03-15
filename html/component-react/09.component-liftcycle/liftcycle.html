@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../js/react.js"></script>
+    <script src="../../../js/react.dom.js"></script>
+    <script src="https://cdn.bootcss.com/prop-types/15.7.2/prop-types.js"></script>
+    <script src="../../../js/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+    /**
+     * react中内置的实例方法中this均指向实例对象
+     * setTimeout(function(){},1000)   是延时定时器
+     * setInterval(function(){},1000)   是循环定时器
+     *
+     *
+     */
+    class Life extends React.Component {
+        constructor(props) {  //（只执行一次）
+            super(props);
+            this.state = {
+                person: {
+                    name: 'Kobe',
+                    age: 30
+                }
+            };
+            this.handleClick = this.handleClick.bind(this);
+            console.log('constructor()');
+        }
+
+        //组件将要被挂载（只执行一次）
+        componentWillMount() {
+            console.log("componentWillMount() 组件将要被挂载");
+            console.log(this);
+            //可以在此阶段发送ajax请求（但是可能有一定的缺陷），开启定时器：
+            // 如果在这里发送请求如果得不到请求的数据会一直等数据来，不执行下一步render(）方法
+            setTimeout(function(){  //定时器中的this指向window
+                this.setState({
+                    person: {
+                        name: 'Mary',
+                        age: 18
+                    }
+                })
+            }.bind(this), 2000);
+            setTimeout(()=>{      //es6箭头函数，自己没有this，所以向外层看，外层函数的this指向实例对象，所以bingo
+                this.setState({
+                    person: {
+                        name: 'Jerry',
+                        age: 0
+                    }
+                })
+            },3000)
+        }
+
+        //组件挂载完毕（只执行一次）
+        componentDidMount() {
+            console.log("componentDidMount() 组件挂载完毕");
+            setTimeout(()=>{
+                //卸载组件的方法： ReactDOM.unmountComponentAtNode()
+                ReactDOM.unmountComponentAtNode(document.getElementById("root"));
+            },4000)
+            this.IntervalId = setInterval(()=>{
+                console.log("setInterval()");
+            },1000)
+        }
+
+        //组件将要更新
+        componentWillUpdate() {
+            console.log("componentWillUpdate() 组件将要更新");
+            //可以在此阶段发送ajax请求，开启定时器
+        }
+
+        //组件更新完毕
+        componentDidUpdate() {
+            console.log("componentDidUpdate() 组件更新完毕")
+        }
+
+        //组件将要被卸载
+        componentWillUnmount() {
+            console.log("componentWillUnmount() 组件将要被卸载")
+            //通常在此做一些收尾工作，比如关掉定时器,不关掉会影响性能
+            clearInterval(this.IntervalId);
+
+
+        }
+
+
+        handleClick() {
+            this.setState({
+                person: {
+                    name: 'Tom',
+                    age: 20
+                }
+            })
+        }
+
+        //执行多次
+        render() {
+            console.log('render()');
+            let {person} = this.state;
+            return (
+                <div>
+                    <h1 onClick={this.handleClick}>{person.name}</h1>
+                    <h1>{person.age}</h1>
+                </div>
+            );
+        }
+    }
+
+    ReactDOM.render(<Life/>, document.getElementById("root"));
+</script>
+</body>
+</html>

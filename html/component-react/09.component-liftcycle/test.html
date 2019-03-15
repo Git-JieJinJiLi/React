@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../js/react.js"></script>
+    <script src="../../../js/react.dom.js"></script>
+    <script src="https://cdn.bootcss.com/prop-types/15.7.2/prop-types.js"></script>
+    <script src="../../../js/babel.min.js"></script>
+    <title>生命周期练习</title>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+
+    class Life extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                msg: "定时闪烁",
+                opacity: 1
+            }
+        }
+
+        componentWillMount() {
+            this.start = setInterval(() => {
+                this.setState({
+                    msg: "定时闪烁",
+                    opacity: 0.5
+                })
+            }, 1000);
+        }
+
+        componentDidMount() {
+           let opacity = this.state.opacity;
+            this.second = setInterval(() => {
+                opacity -= 0.05;
+                console.log(opacity)
+                if(opacity<0.1){
+                    opacity=1;
+                }
+                this.setState({
+                    msg: "定时闪烁",
+                    opacity: opacity
+                })
+            }, 100)
+
+        }
+
+        componentWillUpdate() {
+
+        }
+
+        componentDidUpdate() {
+
+        }
+
+        componentWillUnmount() {
+            clearInterval(this.start);
+        }
+
+        render() {
+            let info = this.state;
+            return (
+                <div style={{opacity: info.opacity}}>
+                    {info.msg}
+                </div>
+            );
+        }
+    }
+
+    ReactDOM.render(<Life/>, document.getElementById("root"));
+</script>
+</body>
+</html>

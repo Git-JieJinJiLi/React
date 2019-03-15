@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../js/react.js"></script>
+    <script src="../../../js/react.dom.js"></script>
+    <script src="https://cdn.bootcss.com/prop-types/15.7.2/prop-types.js"></script>
+    <script src="../../../js/babel.min.js"></script>
+    <title>组件嵌套</title>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    /**
+     *
+     */
+
+        //定义App组件
+    class App extends React.Component {
+        render() {
+            console.log(this.props.arr);
+            let {arr} = this.props;   //ES6的结构赋值
+            return (/*  div是根标签，如果没有根标签则会报错  */
+                <div>
+                    {
+                        arr.map((item,index) => {
+                            return <Welcome name={item} key={index}/>
+                        })
+                    }
+                </div>
+            );
+        }
+    }
+
+    // class Welcome extends React.Component {
+    //     render() {
+    //         return (
+    //             <div>{this.props.name}</div>
+    //         );
+    //     }
+    // }
+
+    function Welcome(props){
+        return (
+            <div>{props.name}</div>
+        );
+    }
+
+    let arr = ['kobe', 'Mary', 'Tom', 'kobe', 'Mary', 'Tom'];
+
+    //渲染组件
+    ReactDOM.render(<App arr={arr}/>, document.getElementById('example'));
+
+</script>
+</body>
+</html>
